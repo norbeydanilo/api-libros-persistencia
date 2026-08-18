@@ -5,6 +5,8 @@ const sequelize = require('./src/config/database');
 
 const PORT = process.env.PORT || 3000;
 
+console.log('API de libros — versión con pipeline CI/CD');
+
 async function iniciar() {
   try {
     // 1. Verifica que la conexión a PostgreSQL funciona
