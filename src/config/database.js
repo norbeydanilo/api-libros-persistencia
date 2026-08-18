@@ -1,8 +1,5 @@
 const { Sequelize } = require('sequelize');
 
-// Sequelize lee las variables de entorno para construir la conexión.
-// En local vienen del archivo .env (cargado por dotenv en index.js).
-// En Docker Compose o en la VM vienen de las variables del contenedor o del sistema.
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -11,7 +8,13 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT || 5432,
     dialect: 'postgres',
-    logging: false, // cambia a true si quieres ver el SQL que genera Sequelize
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
+    logging: false,
   }
 );
 
